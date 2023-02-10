@@ -156,6 +156,13 @@
     rdfs:subPropertyOf :associated-with,
         :hardens .
 
+:connected-to a owl:ObjectProperty,
+        owl:SymmetricProperty ;
+    rdfs:label "connected-to" ;
+    rdfs:subPropertyOf :associated-with ;
+    owl:inverseOf :connected-to ;
+    rdfs:comment "Note: different than connects (noun as in architecture state vice action/verb \"connects\")" .
+
 :connects a owl:ObjectProperty ;
     rdfs:label "connects" ;
     rdfs:subPropertyOf :associated-with ;
@@ -184,6 +191,13 @@ Moving forward different distinctions of kinds of has-part (contains) relationsh
 :contributor a owl:ObjectProperty ;
     rdfs:subPropertyOf :d3fend-catalog-object-property ;
     rdfs:range owl:Thing .
+
+:controlled-by a owl:ObjectProperty ;
+    rdfs:subPropertyOf :associated-with ;
+    owl:inverseOf :controls .
+
+:controls a owl:ObjectProperty ;
+    rdfs:subPropertyOf :associated-with .
 
 :copies a owl:ObjectProperty ;
     rdfs:label "copies" ;
@@ -277,6 +291,11 @@ Moving forward different distinctions of kinds of has-part (contains) relationsh
         "x depends-on y: The entity x is contingent on y being available; x relies on y." ;
     rdfs:seeAlso "https://www.cisa.gov/what-are-dependencies" .
 
+:destination-of a owl:ObjectProperty ;
+    rdfs:label "destination-of" ;
+    rdfs:subPropertyOf :end-point-of ;
+    owl:inverseOf :has-destination .
+
 :detects a owl:ObjectProperty ;
     rdfs:label "detects" ;
     rdfs:subPropertyOf :counters,
@@ -329,6 +348,11 @@ Moving forward different distinctions of kinds of has-part (contains) relationsh
 
 :end a owl:ObjectProperty ;
     rdfs:subPropertyOf :d3fend-process-object-property .
+
+:end-point-of a owl:ObjectProperty ;
+    rdfs:label "end-point-of" ;
+    rdfs:subPropertyOf :associated-with ;
+    owl:inverseOf :has-end-point .
 
 :evaluated-by a owl:ObjectProperty ;
     rdfs:label "evaluated-by" ;
@@ -423,6 +447,17 @@ Moving forward different distinctions of kinds of has-part (contains) relationsh
     rdfs:label "has-dependent" ;
     rdfs:subPropertyOf :associated-with .
 
+:has-destination a owl:ObjectProperty ;
+    rdfs:subPropertyOf :has-end-point ;
+    :comment "x has_destination y: A channel or transfer event x has the targeted location y for delivery." .
+
+:has-encryption a owl:ObjectProperty ;
+    rdfs:label "has-encryption" ;
+    rdfs:subPropertyOf :associated-with .
+
+:has-end-point a owl:ObjectProperty ;
+    rdfs:subPropertyOf :associated-with .
+
 :has-evidence a owl:ObjectProperty ;
     rdfs:label "has-evidence" ;
     rdfs:subPropertyOf :d3fend-catalog-object-property .
@@ -451,6 +486,12 @@ Moving forward different distinctions of kinds of has-part (contains) relationsh
     rdfs:subPropertyOf :d3fend-catalog-object-property ;
     owl:inverseOf :member-of .
 
+:has-part a owl:ObjectProperty ;
+    rdfs:label "has-part" ;
+    rdfs:subPropertyOf :associated-with ;
+    owl:inverseOf :part-of ;
+    rdfs:comment "x has-part y: A core relation that holds between a whole x and its part y." .
+
 :has-prerequisite a owl:ObjectProperty ;
     rdfs:subPropertyOf :d3fend-use-case-object-property .
 
@@ -459,18 +500,31 @@ Moving forward different distinctions of kinds of has-part (contains) relationsh
 
 :has-recipient a owl:ObjectProperty ;
     rdfs:label "has-recipient" ;
-    rdfs:subPropertyOf :associated-with ;
+    rdfs:subPropertyOf :associated-with,
+        :has-destination ;
     rdfs:comment "x has_recipient y: An agent y is the intended recipient and decoder of the information contained in communication x." ;
     rdfs:isDefinedBy <http://www.ontologyrepository.com/CommonCoreOntologies/has_recipient> ;
     rdfs:seeAlso <http://wordnet-rdf.princeton.edu/id/09651094-n>,
-        <http://wordnet-rdf.princeton.edu/id/09788768-n> .
+        <http://wordnet-rdf.princeton.edu/id/09788768-n> ;
+    :todo "Change comment to: x has-recipient y: An agent y is the intended recipient and decoder of the information contained in communication event x.",
+        "Remove :subPropertyOf :associated-with" .
 
 :has-sender a owl:ObjectProperty ;
     rdfs:label "has-sender" ;
-    rdfs:subPropertyOf :associated-with ;
+    rdfs:subPropertyOf :associated-with,
+        :has-source ;
     rdfs:comment "x has_sender y: An agent y is the sender and encoder of the information contained in communication x." ;
     rdfs:isDefinedBy <http://www.ontologyrepository.com/CommonCoreOntologies/has_sender> ;
-    rdfs:seeAlso <http://wordnet-rdf.princeton.edu/id/10598214-n> .
+    rdfs:seeAlso <http://wordnet-rdf.princeton.edu/id/10598214-n> ;
+    :todo "Change comment to: x has-sender y: An agent y is the sender and encoder of the information contained in communication event x.",
+        "Remove :subPropertyOf :associated-with" .
+
+:has-source a owl:ObjectProperty ;
+    rdfs:subPropertyOf :has-end-point ;
+    owl:inverseOf :source-of ;
+    :comment "x has_source y: A channel or transfer event x has as its beginning the location y." ;
+    rdfs:seeAlso "http://wordnet-rdf.princeton.edu/lemma/origin" ;
+    :synonym "has-origin" .
 
 :has-weakness a owl:ObjectProperty ;
     rdfs:subPropertyOf :may-have-weakness .
@@ -844,6 +898,10 @@ Moving forward different distinctions of kinds of has-part (contains) relationsh
     rdfs:comment "x monitors y: The technique or agent x keep tabs on; keeps an eye on; or keep the digital artifact y under surveillance." ;
     rdfs:isDefinedBy <http://wordnet-rdf.princeton.edu/id/02167732-v> .
 
+:mounts a owl:ObjectProperty ;
+    rdfs:label "mounts" ;
+    rdfs:subPropertyOf :uses .
+
 :narrower a owl:ObjectProperty ;
     rdfs:label "narrower" ;
     rdfs:subPropertyOf :semantic-relation .
@@ -883,6 +941,10 @@ Moving forward different distinctions of kinds of has-part (contains) relationsh
     rdfs:comment "x owns y: The subject x has ownership or possession of some object y." ;
     rdfs:isDefinedBy <http://wordnet-rdf.princeton.edu/id/02209474-v> ;
     rdfs:seeAlso <http://dbpedia.org/resource/Ownership> .
+
+:part-of a owl:ObjectProperty ;
+    rdfs:label "part-of" ;
+    rdfs:subPropertyOf :associated-with .
 
 :process-ancestor a owl:ObjectProperty,
         owl:TransitiveProperty ;
@@ -966,6 +1028,11 @@ Moving forward different distinctions of kinds of has-part (contains) relationsh
     rdfs:seeAlso <http://dbpedia.org/resource/Reading_(computer)>,
         <http://wordnet-rdf.princeton.edu/id/00629157-v> .
 
+:receives-from a owl:ObjectProperty ;
+    rdfs:label "receives-from" ;
+    rdfs:subPropertyOf :connected-to ;
+    rdfs:comment "x receives_from y: The entity x receives information from entity y." .
+
 :recorded-in a owl:ObjectProperty ;
     rdfs:label "recorded-in" ;
     rdfs:subPropertyOf :associated-with .
@@ -994,8 +1061,13 @@ Moving forward different distinctions of kinds of has-part (contains) relationsh
     rdfs:label "runs" ;
     rdfs:subPropertyOf :associated-with,
         :may-run ;
+    owl:inverseOf :runs-on ;
     rdfs:comment "x runs y: To carry out a process or program y, as on a computer or a machine x; where y may be a large software assembly or a  specific module or instruction.  Examples: \"run a new program on the Mac\"; \"the computer executed the instruction\"" ;
     rdfs:seeAlso <http://wordnet-rdf.princeton.edu/id/02569242-v> .
+
+:runs-on a owl:ObjectProperty ;
+    rdfs:label "runs-on" ;
+    rdfs:subPropertyOf :associated-with .
 
 :seller a owl:ObjectProperty ;
     rdfs:label "seller" ;
@@ -1009,6 +1081,16 @@ Moving forward different distinctions of kinds of has-part (contains) relationsh
 :semantic-relation a owl:ObjectProperty ;
     rdfs:label "semantic-relation" ;
     rdfs:subPropertyOf :associated-with .
+
+:sends-to a owl:ObjectProperty ;
+    rdfs:label "sends-to" ;
+    rdfs:subPropertyOf :connected-to ;
+    rdfs:comment "x sends_to y: The entity x sends information to, or onto, entity y." .
+
+:source-of a owl:ObjectProperty ;
+    rdfs:label "source-of" ;
+    rdfs:subPropertyOf :end-point-of ;
+    :synonym "origin-of" .
 
 :spoofs a owl:ObjectProperty ;
     rdfs:label "spoofs" ;
@@ -1132,7 +1214,10 @@ Moving forward different distinctions of kinds of has-part (contains) relationsh
 
 :d3fend-annotation a owl:AnnotationProperty ;
     rdfs:label "d3fend-annotation" ;
-    rdfs:comment "x d3fend-annotation y: The d3fend object x has the annotation y." .
+    rdfs:comment "x d3fend-annotation y: The d3fend object x has the annotation y." ;
+    :todo """Is d3fend-annotation an owl:versionInfo or was that an error?
+
+Also, is release-date supposed to be under there (could make sense on this later one?""" .
 
 :d3fend-catalog-annotation-property a owl:AnnotationProperty ;
     rdfs:label "d3fend-catalog-annotation-property" ;
@@ -1281,6 +1366,9 @@ skos:altLabel a owl:AnnotationProperty ;
 
 ### Data Properties
 
+:address a owl:DatatypeProperty ;
+    rdfs:subPropertyOf :d3fend-artifact-data-property .
+
 :archived-at a owl:DatatypeProperty ;
     rdfs:label "archived-at"@en ;
     rdfs:subPropertyOf :d3fend-catalog-data-property ;
@@ -1422,6 +1510,9 @@ skos:altLabel a owl:AnnotationProperty ;
     rdfs:range xsd:string ;
     rdfs:comment "x operating-system y: The product x is supported on operating system y." .
 
+:port a owl:DatatypeProperty ;
+    rdfs:subPropertyOf :d3fend-artifact-data-property .
+
 :process-command-line-arguments a owl:DatatypeProperty ;
     rdfs:label "process-command-line-arguments" ;
     rdfs:subPropertyOf :process-data-property ;
@@ -1514,6 +1605,13 @@ skos:altLabel a owl:AnnotationProperty ;
     rdfs:comment "x value y: The key-value pair x has the data value y." .
 
 ### Classes
+
+:ABI a owl:Class ;
+    rdfs:label "ABI" ;
+    rdfs:subClassOf :SoftwareInterface ;
+    rdfs:comment "In computer software, an application binary interface (ABI) is an interface between two binary program modules. Often, one of these modules is a library or operating system facility, and the other is a program that is being run by a user." ;
+    rdfs:isDefinedBy "https://dbpedia.org/page/Application_binary_interface" ;
+    :synonym "Application Binary Interface" .
 
 :AcademicArticle a owl:Class ;
     rdfs:label "Academic Article" ;
@@ -1675,11 +1773,25 @@ Another means of establishing network connectivity is by means of sendingn traff
     rdfs:subClassOf :Dependency ;
     :definition "An activity dependency is a dependency that indicates an activity has an activity or agent which relies on it in order to be functional." .
 
+:Address a owl:Class ;
+    rdfs:subClassOf :Identifier ;
+    rdfs:isDefinedBy "http://wordnet-rdf.princeton.edu/id/06367922-n" ;
+    :comment "The code that identifies where a piece of information is stored." ;
+    rdfs:seeAlso "https://dbpedia.org/page/Address",
+        "https://dbpedia.org/page/Address_space",
+        "https://en.wikipedia.org/wiki/Address_(disambiguation)" ;
+    :synonym "Discrete Address" .
+
+:AddressBus a owl:Class ;
+    rdfs:label "Address Bus" ;
+    rdfs:subClassOf :Bus .
+
 :AddressSpace a owl:Class ;
     rdfs:label "Address Space" ;
     rdfs:subClassOf :DigitalArtifact ;
     rdfs:comment "An address space defines a range of discrete addresses, each of which may correspond to a network host, peripheral device, disk sector, a memory cell or other logical or physical entity. For software programs to save and retrieve stored data, each unit of data must have an address where it can be located. The number of address spaces available depends on the underlying address structure, which is usually limited by the computer architecture being used." ;
-    rdfs:isDefinedBy "https://dbpedia.org/page/Address_space" .
+    rdfs:isDefinedBy "https://dbpedia.org/page/Address_space" ;
+    :comment "In computing, an address space defines a range of discrete addresses, each of which may correspond to a network host, peripheral device, disk sector, a memory cell or other logical or physical entity." .
 
 :AdminFeatureAssessment a owl:Class ;
     rdfs:label "Admin Feature Assessment" ;
@@ -1757,6 +1869,27 @@ Network protocols such as RDP, IPMI, SSH, SNMP, VNC, MOSH, NX, TeamViewer, SPICE
     rdfs:label "Analytic Latency" ;
     rdfs:subClassOf :Latency .
 
+:Antenna a owl:Class ;
+    rdfs:label "Antenna" ;
+    rdfs:subClassOf :CommunicationsEndPoint,
+        :HardwareDevice ;
+    rdfs:comment "In radio engineering, an antenna or aerial is the interface between radio waves propagating through space and electric currents moving in metal conductors, used with a transmitter or receiver. In transmission, a radio transmitter supplies an electric current to the antenna's terminals, and the antenna radiates the energy from the current as electromagnetic waves (radio waves). In reception, an antenna intercepts some of the power of a radio wave in order to produce an electric current at its terminals, that is applied to a receiver to be amplified. Antennas are essential components of all radio equipment." ;
+    rdfs:isDefinedBy "https://dbpedia.org/page/Antenna" ;
+    :synonym "Aerial" .
+
+:Anycast a owl:Class ;
+    rdfs:subClassOf :IPTransmissionTechnique .
+
+:ApacheTomcat a owl:Class ;
+    rdfs:label "Apache Tomcat"@en ;
+    rdfs:subClassOf :WebServerApplication .
+
+:API a owl:Class ;
+    rdfs:label "API" ;
+    rdfs:subClassOf :SoftwareInterface ;
+    rdfs:comment "An application programming interface (API) is a connection between computers or between computer programs. It is a type of software interface, offering a service to other pieces of software." ;
+    rdfs:isDefinedBy "https://dbpedia.org/page/API" .
+
 :Appliance a owl:Class ;
     rdfs:label "Appliance" ;
     rdfs:subClassOf :Product .
@@ -1773,6 +1906,10 @@ Network protocols such as RDP, IPMI, SSH, SNMP, VNC, MOSH, NX, TeamViewer, SPICE
     rdfs:comment "A program that gives a computer instructions that provide the user with tools to accomplish a task; \"he has tried several different word processing applications\".  Distinct from system software that is intrinsically part of the operating system.  An application can be made up of executable files, configuration files, shared libraries, etc." ;
     rdfs:seeAlso <http://dbpedia.org/resource/Application_software>,
         <http://wordnet-rdf.princeton.edu/id/06582286-n> .
+
+:ApplicationChannel a owl:Class ;
+    rdfs:label "Application Channel" ;
+    rdfs:subClassOf :Connection-orientedChannel .
 
 :ApplicationConfiguration a owl:Class ;
     rdfs:label "Application Configuration" ;
@@ -1818,6 +1955,11 @@ Application configuration settings can be configured to limit the permissions on
 Hardening an application's configuration involves analyzing not only the application but also the environment in which the application is run in for potential vulnerabilities.""" ;
     :kb-reference :Reference-RedHatEnterpriseLinux8SecurityTechnicalImplementationGuide,
         :Reference-Windows10STIG .
+
+:ApplicationConnection a owl:Class ;
+    rdfs:label "Application Connection" ;
+    rdfs:subClassOf :Connection ;
+    rdfs:comment "An application connection is a connection between two end points at the application layer" .
 
 :ApplicationHardening a :DefensiveTechnique,
         owl:Class,
@@ -1888,6 +2030,27 @@ Exploits may, for example, rely on knowledge of addresses in a process's memory,
     rdfs:subClassOf :File ;
     rdfs:comment "An archive file is a file that is composed of one or more computer files along with metadata. Archive files are used to collect multiple data files together into a single file for easier portability and storage, or simply to compress files to use less storage space. Archive files often store directory structures, error detection and correction information, arbitrary comments, and sometimes use built-in encryption." ;
     rdfs:isDefinedBy <http://dbpedia.org/resource/Archive_file> .
+
+:ARINC429Receiver a owl:Class ;
+    rdfs:label "ARINC-429 Receiver" ;
+    rdfs:subClassOf :HardwareDevice .
+
+:ARINC429Transmitter a owl:Class ;
+    rdfs:label "ARINC-429 Transmitter" ;
+    rdfs:subClassOf :HardwareDevice .
+
+:ARINC492Bus a owl:Class ;
+    rdfs:label "ARINC-429 Bus" ;
+    rdfs:subClassOf :Bus .
+
+:ArmABI a owl:Class ;
+    rdfs:label "ARM ABI",
+        "Arm ABI" ;
+    rdfs:subClassOf :ABI ;
+    :comment "The Arm Application Binary Interface (ABI) is the ABI for the Arm architecture.  [Background: Arm traces back to Advanced RISC Machines (ARM), the first being] the Acorn RISC Machine.]" ;
+    rdfs:seeAlso "https://github.com/ARM-software/abi-aa/releases" ;
+    :synonym "Advanced RISC Machine ABI",
+        "ARM ABI" .
 
 :Article a owl:Class ;
     rdfs:label "Article" ;
@@ -2141,6 +2304,25 @@ Depending on the complexity of the data considered, outliers may not be obvious 
     rdfs:isDefinedBy <https://www.sciencedirect.com/referencework/9780122272400/encyclopedia-of-information-systems> ;
     rdfs:seeAlso <http://dbpedia.org/resource/Authorization> .
 
+:AvionicsControlUnit a owl:Class ;
+    rdfs:label "Avionics Control Unit" ;
+    rdfs:subClassOf :AvionicSystem,
+        :DigitalControlSystem,
+        :HardwareDevice ;
+    :synonym "ACU" .
+
+:AvionicSystem a owl:Class ;
+    rdfs:label "Avionic System" ;
+    rdfs:subClassOf :System ;
+    rdfs:comment """See also "Avionics" https://en.wikipedia.org/wiki/Avionics as alternative and map the loose sense of "Flight Hardware" to "Avionic System" which is broader term and covers aircraft, satellites, and spacecraft.  Let's broaden some class here incorporate ideas in DO-178C "Software Considerations in Airborne Systems and Equipment Certification."
+
+Breakout a task on addressing "Aircraft networks" noted here, which includes ARINC 429 and MIL-STD-1553
+https://en.wikipedia.org/wiki/Avionics#Aircraft_networks
+
+for another sense of Airborne Electronic Hardware, there is scope of DO-254:  Can be circuit board assemblies, FPGAs, PLDs, ASICs, integrated technology (hybrid IC and multi-chip modules), or "COTS components'.  Up through and to complex microcoded components, but short of GP computers in DO-254, it seems. But this narrow does not jibe with examples and loose usage of 'flight hardware' here to include flight recorders, radio modems, IFF, TCAS, etc.""" ;
+    :synonym "Flight Hardware" ;
+    :todo "Review in context of https://en.wikipedia.org/wiki/DO-254; will we consider the software within the \"flight hardware\" part of the flight hardware system or just the hardware proper." .
+
 :BarcodeScannerInputDevice a owl:Class ;
     rdfs:label "Barcode Scanner Input Device" ;
     skos:altLabel "Barcode Reader" ;
@@ -2240,6 +2422,11 @@ IEEE Std 1003.1-2017: A file that refers to a device. A block special file is no
     rdfs:comment "A boot record [boot sector] is the sector of a persistent data storage device (e.g., hard disk, floppy disk, optical disc, etc.) which contains machine code to be loaded into random-access memory (RAM) and then executed by a computer system's built-in firmware (e.g., the BIOS, Das U-Boot, etc.)." ;
     rdfs:seeAlso <http://dbpedia.org/resource/Boot_sector> .
 
+:Broadcast a owl:Class ;
+    rdfs:label "Broadcast" ;
+    rdfs:subClassOf :IPTransmissionTechnique ;
+    rdfs:seeAlso "https://ipcisco.com/lesson/unicast-broadcast-multicast-anycast/" .
+
 :BroadcastDomainIsolation a :NetworkIsolation,
         owl:Class,
         owl:NamedIndividual ;
@@ -2260,6 +2447,16 @@ This technique is highly dependent on network infrastructure and networking requ
     :kb-reference :Reference-BroadcastIsolationAndLevel3NetworkSwitch_HewlettPackardEnterpriseDevelopmentLP,
         :Reference-PrivateVirtualLocalAreaNetworkIsolation_CiscoTechnologyInc ;
     :synonym "Network Segmentation" .
+
+:BroadcastLink a owl:Class ;
+    rdfs:label "Broadcast Link" ;
+    rdfs:subClassOf :TelecommunicationLink,
+        [ a owl:Restriction ;
+            owl:onProperty :has-destination ;
+            owl:someValuesFrom :Artifact ],
+        [ a owl:Restriction ;
+            owl:onProperty :has-source ;
+            owl:someValuesFrom :Artifact ] .
 
 :Browser a owl:Class ;
     rdfs:label "Browser" ;
@@ -2286,6 +2483,12 @@ This technique is highly dependent on network infrastructure and networking requ
     rdfs:subClassOf :DeveloperApplication ;
     rdfs:comment "A tool that automates the process of creating a software build and the associated processes including: compiling computer source code into binary code, packaging binary code, and running automated tests." ;
     rdfs:seeAlso <http://dbpedia.org/resource/Build_automation> .
+
+:Bus a owl:Class ;
+    rdfs:subClassOf :PhysicalLink ;
+    rdfs:comment "In computer architecture, a bus (shortened form of the Latin omnibus, and historically also called data highway) is a communication system that transfers data between components inside a computer, or between computers. This expression covers all related hardware components (wire, optical fiber, etc.) and software, including communication protocols." ;
+    rdfs:isDefinedBy "https://dbpedia.org/page/Bus_(computing)" ;
+    :synonym "Computer Bus" .
 
 :BusinessCommunicationPlatformClient a owl:Class ;
     rdfs:label "Business Communication Platform Client" ;
@@ -2329,6 +2532,9 @@ Byte sequences containing code that is never used as machine code are still anal
     :kb-reference :Reference-Network-BasedBufferOverflowDetectionByExploitCodeAnalysis_InformationSecurityResearchCentre,
         :Reference-Network-levelPolymorphicShellcodeDetectionUsingEmulation ;
     :synonym "Shellcode Transmission Detection" .
+
+:Cable a owl:Class ;
+    rdfs:subClassOf :PhysicalTelecommunicationLink .
 
 :CACertificateFile a owl:Class ;
     rdfs:label "CA Certificate File" ;
@@ -2485,6 +2691,15 @@ DHHS, National Health Security Review 2010‐ 2014, Terms, Jan 17""" ;
             owl:onProperty :published ;
             owl:someValuesFrom xsd:dateTime ] .
 
+:Centos7 a owl:Class ;
+    rdfs:label "Centos 7"@en ;
+    rdfs:subClassOf :Linux ;
+    owl:disjointWith :Centos8 .
+
+:Centos8 a owl:Class ;
+    rdfs:label "Centos 8"@en ;
+    rdfs:subClassOf :Linux .
+
 :CentralProcessingUnit a owl:Class ;
     rdfs:label "Central Processing Unit" ;
     rdfs:subClassOf :Processor,
@@ -2598,6 +2813,16 @@ An extension of PKP is Subject Public Key Information Pinning (SPKI) includes pu
     rdfs:seeAlso <http://dbpedia.org/resource/Public_key_certificate>,
         <https://www.educative.io/edpresso/keystore-vs-truststore> .
 
+:Channel a owl:Class ;
+    rdfs:label "Channel" ;
+    rdfs:subClassOf :D3FENDThing,
+        [ a owl:Restriction ;
+            owl:onProperty :has-end-point ;
+            owl:someValuesFrom :PhysicalArtifact ] ;
+    rdfs:comment "A communication channel refers either to a physical transmission medium such as a wire, or to a logical connection over a multiplexed medium such as a radio channel in telecommunications and computer networking.  Telecommunications indicates communications over a distance, sufficient to at least indicate the distance in function is at least least internodal (that is, between network nodes) vice intranodal (within a network node.)" ;
+    rdfs:seeAlso "https://dbpedia.org/page/Communication_channel" ;
+    :synonym "Communications Channel" .
+
 :ChatroomClient a owl:Class ;
     rdfs:label "Chatroom Client" ;
     skos:altLabel "Chat Room Client" ;
@@ -2611,6 +2836,10 @@ An extension of PKP is Subject Public Key Information Pinning (SPKI) includes pu
     rdfs:comment "A child process in computing is a process created by another process (the parent process). This technique pertains to multitasking operating systems, and is sometimes called a subprocess or traditionally a subtask. There are two major procedures for creating a child process: the fork system call (preferred in Unix-like systems and the POSIX standard) and the spawn (preferred in the modern (NT) kernel of Microsoft Windows, as well as in some historical operating systems)." ;
     rdfs:isDefinedBy <http://dbpedia.org/resource/Child_process> ;
     rdfs:seeAlso <http://dbpedia.org/resource/Parent_process> .
+
+:Chrome a owl:Class ;
+    rdfs:label "Chrome" ;
+    rdfs:subClassOf :Browser .
 
 :Client-serverPayloadProfiling a :NetworkTrafficAnalysis,
         owl:Class,
@@ -2793,6 +3022,10 @@ Profiling request and response payloads across multiple clients to a single serv
     rdfs:subClassOf :CAPECThing ;
     rdfs:comment "A common attack pattern that is in the CAPEC knowledge base." .
 
+:CommunicationsEndPoint a owl:Class ;
+    rdfs:label "Communications End Point" ;
+    rdfs:subClassOf :D3FENDThing .
+
 :Compiler a owl:Class ;
     rdfs:label "Compiler" ;
     rdfs:subClassOf :BuildTool,
@@ -2807,10 +3040,24 @@ Profiling request and response payloads across multiple clients to a single serv
     rdfs:subClassOf :ApplicationConfigurationFile ;
     rdfs:comment "A file containing Information used to configure the parameters and initial settings for a compiler." .
 
+:ComponentObjectModel a owl:Class ;
+    rdfs:label "Component Object Model" ;
+    rdfs:subClassOf :ABI ;
+    rdfs:comment "Component Object Model (COM) is a binary-interface standard for software components introduced by Microsoft in 1993. It is used to enable inter-process communication object creation in a large range of programming languages." ;
+    rdfs:isDefinedBy "https://dbpedia.org/page/Component_Object_Model" ;
+    :synonym "COM" .
+
 :CompositeTechnique a owl:Class ;
     rdfs:label "Composite Technique" ;
     rdfs:subClassOf :D3FENDThing ;
     rdfs:comment "A commonly applied series of techniques which induce a greater effect than each individual technique. The techniques are applied in a strict sequence." .
+
+:ComputerNetworkChannel a owl:Class ;
+    rdfs:label "Computer Network Channel" ;
+    rdfs:subClassOf :LogicalChannel ;
+    rdfs:seeAlso """A computer network channel is a path between end points at the network layer of abstraction.
+
+NOTE: This is abstract and not meant to represent Layer 3 - The Network Layer of OSI model per se.""" .
 
 :ComputingServer a owl:Class ;
     rdfs:label "Computing Server" ;
@@ -2890,6 +3137,19 @@ Decoy honeypots are deployed within the enterprise environment that emulate cert
 A connected honeynet provides a tradeoff between emulating certain functionality but not being as sophisticated as an integrated honeynet. The connected honeynet may not provide enough functionality to detect new attack patterns or zero day exploits but could provide enough functionality for specific known vulnerabilities.""" ;
     :kb-reference :Reference-ModificationOfAServerToMimicADeceptionMechanism_AcalvioTechnologiesInc .
 
+:Connection a owl:Class ;
+    rdfs:label "Connection" ;
+    rdfs:subClassOf :ComputerNetworkChannel,
+        :Connection-orientedChannel ;
+    rdfs:comment "A connection is a logical point-to-point communications channel that has two end points.  An example would be a TCP/IP connection between sockets or a persistent HTTP connection." ;
+    :synonym "Point-to-Point Channel" .
+
+:Connection-orientedChannel a owl:Class ;
+    rdfs:label "Connection-oriented Channel" ;
+    rdfs:subClassOf :Channel ;
+    rdfs:seeAlso "(general case; not just TCP of TCP/IP, but includes it.)  Assume full duplex always as in TCP?",
+        "https://en.wikipedia.org/wiki/Connection-oriented_communication" .
+
 :ConnectionAttemptAnalysis a :NetworkTrafficAnalysis,
         owl:Class,
         owl:NamedIndividual ;
@@ -2916,6 +3176,20 @@ Another approach passively inspects network traffic with application protocol an
 * IPv6 also introduces challenges including IPv6 traffic bypassing IPv4 specific protection systems (ex. firewalls and IDS) and complexity in managing both IPv6 and IPv4 addresses.""" ;
     :kb-reference :Reference-DetectingNetworkReconnaissanceByTrackingIntranetDark-netCommunications_VECTRANETWORKSInc ;
     :synonym "Network Scan Detection" .
+
+:ConnectionlessChannel a owl:Class ;
+    rdfs:label "Connectionless Communication" ;
+    rdfs:subClassOf :DigitalCommunication,
+        [ a owl:Restriction ;
+            owl:onProperty :has-destination ;
+            owl:onClass :Artifact ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        [ a owl:Restriction ;
+            owl:onProperty :has-source ;
+            owl:onClass :Artifact ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ] ;
+    rdfs:comment "(general case; not just UDP, but includes it.)" ;
+    rdfs:seeAlso "https://en.wikipedia.org/wiki/Connectionless_communication" .
 
 :ConnectSocket a owl:Class ;
     rdfs:label "Connect Socket" ;
@@ -2967,6 +3241,10 @@ Container images become containers at runtime and in the case of Docker containe
             owl:onProperty :has-contributor ;
             owl:someValuesFrom :Agent ] .
 
+:ControlBus a owl:Class ;
+    rdfs:label "Control Bus" ;
+    rdfs:subClassOf :Bus .
+
 :ControlCatalog a owl:Class ;
     rdfs:label "Control Catalog" ;
     rdfs:subClassOf :Catalog,
@@ -2986,6 +3264,18 @@ Container images become containers at runtime and in the case of Docker containe
             owl:someValuesFrom :CCIControl ] ;
     :definition "A control correlation identifier (CCI) catalog provides a catalog of CCIs for a given release date." ;
     rdfs:seeAlso "https://public.cyber.mil/stigs/cci/" .
+
+:ControlSystem a owl:Class ;
+    rdfs:label "Control System" ;
+    rdfs:subClassOf :System,
+        [ a owl:Restriction ;
+            owl:onProperty :controls ;
+            owl:someValuesFrom :Artifact ] ;
+    rdfs:isDefinedBy "http://wordnet-rdf.princeton.edu/id/03103457-n" ;
+    :comment "A system for controlling the operation of another system." ;
+    rdfs:seeAlso "https://en.wikipedia.org/wiki/Control_system",
+        "https://www.trendmicro.com/vinfo/us/security/definition/industrial-control-system" ;
+    :synonym "Controller" .
 
 :CopyMemoryFunction a owl:Class ;
     rdfs:label "Copy Memory Function" ;
@@ -3424,6 +3714,10 @@ Some capabilities sanitize queries before permitting them to be transmitted to t
     rdfs:comment "A database server is a server which uses a database application that provides database services to other computer programs or to computers, as defined by the client-server model. Database management systems (DBMSs) frequently provide database-server functionality, and some database management systems (such as MySQL) rely exclusively on the client-server model for database access (while others e.g. SQLite are meant for using as an embedded database). For clarification, a database server is simply a server that maintains services related to clients via database applications." ;
     rdfs:isDefinedBy <http://dbpedia.org/resource/Database_server> .
 
+:DataBus a owl:Class ;
+    rdfs:label "Data Bus" ;
+    rdfs:subClassOf :Bus .
+
 :DataDependency a owl:Class ;
     rdfs:label "Data Dependency" ;
     rdfs:subClassOf :Dependency ;
@@ -3845,9 +4139,29 @@ A credential may be:
         <http://dbpedia.org/resource/Virtual_artifact> ;
     :synonym "Digital Asset" .
 
+:DigitalCommunication a owl:Class ;
+    rdfs:label "Digital Communication" ;
+    rdfs:subClassOf :DigitalArtifact,
+        :InformationExchange .
+
+:DigitalControlSystem a owl:Class ;
+    rdfs:label "Digital Control System" ;
+    rdfs:subClassOf :ControlSystem,
+        :DigitalArtifact ;
+    :comment """A control system for controlling the operation of another system using digital technology; that is, a control system that is a digital artifact
+.""" ;
+    rdfs:seeAlso "https://en.wikipedia.org/wiki/Digital_control" ;
+    :todo "Determine if PLC, though normally associated with control of manufacturing processes (ala Wik, for one example), or just represent all Digital Control Systems in general.  Thus FADEC, RCS will also be PLCs." .
+
 :DigitalEvent a owl:Class ;
     rdfs:label "Digital Event" ;
     rdfs:subClassOf :D3FENDThing .
+
+:DigitalInterface a owl:Class ;
+    rdfs:label "Digital Interface" ;
+    rdfs:subClassOf :DigitalArtifact,
+        :Interface ;
+    rdfs:isDefinedBy "https://en.wikipedia.org/wiki/Interface_(computing)" .
 
 :DigitalObject a owl:Class ;
     rdfs:label "Digital Object" ;
@@ -3984,7 +4298,9 @@ For example, a DNS policy can be created for blocking DNS queries for FQDNs that
 :DNSNetworkTraffic a owl:Class ;
     rdfs:label "DNS Network Traffic" ;
     rdfs:subClassOf :NetworkTraffic ;
-    rdfs:comment "RPC network traffic is network traffic related to remote procedure calls between network nodes..This includes only network traffic conforming to a standard RPC protocol; not custom protocols." .
+    rdfs:comment "RPC network traffic is network traffic related to remote procedure calls between network nodes..This includes only network traffic conforming to a standard RPC protocol; not custom protocols." ;
+    rdfs:seeAlso "https://dbpedia.org/page/Domain_Name_System" ;
+    :todo "Change comment to: Domain Name System (DNS) network traffic is application layer network traffic conforming to DNS message formats and protocols, which when given a name provide information on computers, services, and other resources over IP networks." .
 
 :DNSRecord a owl:Class ;
     rdfs:label "DNS Record" ;
@@ -4066,7 +4382,8 @@ This technique does not check for content hosted at the domain.
         [ a owl:Restriction ;
             owl:onProperty :identifies ;
             owl:someValuesFrom :IPAddress ] ;
-    rdfs:comment "A domain name is an identification string that defines a realm of administrative autonomy, authority or control within the Internet. Domain names are formed by the rules and procedures of the Domain Name System (DNS). Any name registered in the DNS is a domain name.Domain names are used in various networking contexts and application-specific naming and addressing purposes. In general, a domain name represents an Internet Protocol (IP) resource, such as a personal computer used to access the Internet, a server computer hosting a web site, or the web site itself or any other service communicated via the Internet. In 2015, 294 million domain names had been registered." .
+    rdfs:comment "A domain name is an identification string that defines a realm of administrative autonomy, authority or control within the Internet. Domain names are formed by the rules and procedures of the Domain Name System (DNS). Any name registered in the DNS is a domain name.Domain names are used in various networking contexts and application-specific naming and addressing purposes. In general, a domain name represents an Internet Protocol (IP) resource, such as a personal computer used to access the Internet, a server computer hosting a web site, or the web site itself or any other service communicated via the Internet. In 2015, 294 million domain names had been registered." ;
+    :todo "Change comment to: A domain name is an identification string that defines a realm of administrative autonomy, authority or control within the Internet. Domain names are formed by the rules and procedures of the Domain Name System (DNS). Any name registered in the DNS is a domain name. Domain names are used in various networking contexts and application-specific naming and addressing purposes. In general, a domain name represents an Internet Protocol (IP) resource, such as a personal computer used to access the Internet, a server computer hosting a web site, or the web site itself or any other service communicated via the Internet. In 2015, 294 million domain names had been registered" .
 
 :DomainNameReputationAnalysis a :IdentifierReputationAnalysis,
         owl:Class,
@@ -4210,7 +4527,12 @@ Analyzing the interaction of a piece of code with a system while the code is bei
     skos:altLabel "Embedded System" ;
     rdfs:subClassOf :ClientComputer ;
     rdfs:comment "An embedded computer is a computer system -- a combination of a computer processor, computer memory, and input/output peripheral devices-that has a dedicated function within a larger mechanical or electrical system. It is embedded as part of a complete device often including electrical or electronic hardware and mechanical parts. Because an embedded system typically controls physical operations of the machine that it is embedded within, it often has real-time computing constraints. Embedded systems control many devices in common use today. Ninety-eight percent of all microprocessors manufactured are used in embedded systems." ;
-    rdfs:isDefinedBy <http://dbpedia.org/resource/Embedded_system> .
+    rdfs:isDefinedBy <http://dbpedia.org/resource/Embedded_system> ;
+    :todo """Want to use this as definition in context of a larger system, so being an embedded computer is contextual (it is a computer that is part of a larger system.)  A given class or type of computer might be primary or embedded depending on use.  Raspberry PIs being a key example.  They might be standalone or even used as PCs, but may typically be found as embeddd in larger systems.
+
+Now, a Raspberry Pi might also be classified as a SingleBoardComputer by definition, but that's not role-oriented, though it does indicate limitation on the class/scope of functions it can perform.  SBCs are distinct from Desktops (no expansion slots).
+
+But this line of thinking that Client and Server are really roles too, rather than definitions.  You are a server or client because of role.""" .
 
 :EmulatedFileAnalysis a :FileAnalysis,
         owl:Class,
@@ -4236,6 +4558,10 @@ Analyzing the interaction of a piece of code with a system while the code is bei
             owl:someValuesFrom :LocalAreaNetwork ] ;
     rdfs:comment "Network enclaves consist of standalone assets that do not interact with other information systems or networks. A major difference between a DMZ or demilitarized zone and a network enclave is a DMZ allows inbound and outbound traffic access, where firewall boundaries are traversed. In an enclave, firewall boundaries are not traversed. Enclave protection tools can be used to provide protection within specific security domains. These mechanisms are installed as part of an Intranet to connect networks that have similar security requirements." ;
     rdfs:isDefinedBy <http://dbpedia.org/resource/Network_enclave> .
+
+:EncryptedChannel a owl:Class ;
+    rdfs:label "Encrypted Channel" ;
+    rdfs:subClassOf :ComputerNetworkChannel .
 
 :EncryptedCredential a owl:Class ;
     rdfs:label "Encrypted Credential" ;
@@ -4280,6 +4606,10 @@ Endpoints are configured to periodically generate and transmit a secure heartbea
 :EndpointSensor a owl:Class ;
     rdfs:label "Endpoint Sensor" ;
     rdfs:subClassOf :Sensor .
+
+:EthernetCable a owl:Class ;
+    rdfs:label "Ethernet Cable" ;
+    rdfs:subClassOf :Cable .
 
 :EvalFunction a owl:Class ;
     rdfs:label "Eval Function" ;
@@ -4519,6 +4849,13 @@ On a Windows machine the Windows Defender Application Control (WDAC) policy enfo
         :TechniqueReference ;
     :pref-label "External Knowledge Base" ;
     :todo "Consider working  on alias or new preferred name... meh on \"Knowledge Content Entity\",  not sure \"External\" is helpful in conveying core concept; examples would be DBPedia, ATT&CK, CAPEC, CVE, ..., we included CAR; maybe even STIG or are they better as Guidance?" .
+
+:FADEC a owl:Class ;
+    rdfs:label "FADEC" ;
+    rdfs:subClassOf :AvionicSystem,
+        :DigitalControlSystem ;
+    rdfs:comment "A FADEC is a digital control system that controls an aircraft engine." ;
+    :synonym "Full Authority Digital Engine Control" .
 
 :FastSymbolicLink a owl:Class ;
     rdfs:label "Fast Symbolic Link" ;
@@ -4775,6 +5112,10 @@ Performance on large files or very large numbers of files.""" ;
     rdfs:comment "A fingerprint sensor is an electronic device used to capture a digital image of the fingerprint pattern. The captured image is called a live scan. This live scan is digitally processed to create a biometric template (a collection of extracted features) which is stored and used for matching. Many technologies have been used including optical, capacitive, RF, thermal, piezoresistive, ultrasonic, piezoelectric, and MEMS." ;
     rdfs:isDefinedBy <http://dbpedia.org/resource/Fingerprint#Fingerprint_sensors> .
 
+:Firefox a owl:Class ;
+    rdfs:label "Firefox" ;
+    rdfs:subClassOf :Browser .
+
 :Firewall a owl:Class ;
     rdfs:label "Firewall" ;
     skos:altLabel "Network Firewall" ;
@@ -4880,6 +5221,10 @@ Cryptographic hash values are computed for system and peripheral firmware. The h
     rdfs:comment "Flash memory is an electronic non-volatile computer memory storage medium that can be electrically erased and reprogrammed." ;
     rdfs:isDefinedBy "https://dbpedia.org/page/Flash_memory" .
 
+:FlightRecorder a owl:Class ;
+    rdfs:label "Flight Recorder" ;
+    rdfs:subClassOf :AvionicSystem .
+
 :ForwardProxyServer a owl:Class ;
     rdfs:label "Forward Proxy Server" ;
     rdfs:subClassOf :ProxyServer ;
@@ -4935,6 +5280,14 @@ The DNS lookup can be blocked by either dropping the network traffic with an inl
 * Replacing the response is not effective in the case that the nameserver uses a technique to provide integrity of its responses, such as DNSSEC for DNS responses.""" ;
     :kb-reference :Reference-UseDNSPolicyForApplyingFiltersOnDNSQueries ;
     :synonym "Forward Resolution IP Blacklisting" .
+
+:FreeBSD a owl:Class ;
+    rdfs:label "FreeBSD" ;
+    rdfs:subClassOf :Unix-likeOS .
+
+:FullDuplex a owl:Class ;
+    rdfs:label "Full Duplex" ;
+    rdfs:subClassOf :TransmissionMode .
 
 :GetOpenSockets a owl:Class ;
     rdfs:label "Get Open Sockets" ;
@@ -5006,12 +5359,24 @@ The DNS lookup can be blocked by either dropping the network traffic with an inl
     rdfs:subClassOf :PolicyReference ;
     :pref-label "Guideline" .
 
+:HalfDuplex a owl:Class ;
+    rdfs:label "Half Duplex" ;
+    rdfs:subClassOf :TransmissionMode .
+
 :HardDiskFirmware a owl:Class ;
     rdfs:label "Hard Disk Firmware" ;
     skos:altLabel "Hard Drive Firmware" ;
     rdfs:subClassOf :PeripheralFirmware ;
     rdfs:comment "Firmware that is installed on a hard disk device." ;
     rdfs:seeAlso <http://dbpedia.org/resource/Hard_disk_drive> .
+
+:HardDrive a owl:Class ;
+    rdfs:label "Hard Drive" ;
+    rdfs:subClassOf :HardwareDevice,
+        :LocalStorage ;
+    :synonym "Hard Disk",
+        "Hard Disk Drive",
+        "HDD" .
 
 :Harden a :DefensiveTactic,
         owl:Class,
@@ -5108,6 +5473,10 @@ Administrators collect information on hardware devices such as peripherals, NICs
             owl:someValuesFrom :HardwareDevice ] ;
     rdfs:comment "In computing, a device driver (commonly referred to simply as a driver) is a computer program that operates or controls a particular type of device that is attached to a computer. A driver provides a software interface to hardware devices, enabling operating systems and other computer programs to access hardware functions without needing to know precise details of the hardware being used. A driver communicates with the device through the computer bus or communications subsystem to which the hardware connects. When a calling program invokes a routine in the driver, the driver issues commands to the device. Once the device sends data back to the driver, the driver may invoke routines in the original calling program. Drivers are hardware dependent and operating-system-specific. They usually provide the interrupt handling required for any necessary asynchronous time-dependent hardware interface." ;
     rdfs:isDefinedBy <http://dbpedia.org/resource/Device_driver> .
+
+:HardwareInterface a owl:Class ;
+    rdfs:label "Hardware Interface" ;
+    rdfs:subClassOf :DigitalInterface .
 
 :HeapSegment a owl:Class ;
     rdfs:label "Heap Segment" ;
@@ -5225,6 +5594,14 @@ A homoglyph, in this context, is a deceptive string or word which looks like a t
     rdfs:comment "A document file encoded in HTML.The HyperText Markup Language, or HTML is the standard markup language for documents designed to be displayed in a web browser. It can be assisted by technologies such as Cascading Style Sheets (CSS) and scripting languages such as JavaScript. Web browsers receive HTML documents from a web server or from local storage and render the documents into multimedia web pages. HTML describes the structure of a web page semantically and originally included cues for the appearance of the document." ;
     rdfs:seeAlso <http://dbpedia.org/resource/HTML> .
 
+:HTTPConnection a owl:Class ;
+    rdfs:label "HTTP Connection" ;
+    rdfs:subClassOf :ApplicationConnection .
+
+:HTTPSConnection a owl:Class ;
+    rdfs:label "HTTPS Connection" ;
+    rdfs:subClassOf :ApplicationConnection .
+
 :HumanInputDeviceFirmware a owl:Class ;
     rdfs:label "Human Input Device Firmware" ;
     rdfs:subClassOf :PeripheralFirmware ;
@@ -5259,6 +5636,14 @@ A homoglyph, in this context, is a deceptive string or word which looks like a t
     :d3fend-id "D3-IRA" ;
     :definition "Analyzing the reputation of an identifier." ;
     :kb-reference :Reference-Finding_phishing_sites .
+
+:IFF a owl:Class ;
+    rdfs:label "IFF" ;
+    rdfs:subClassOf :AvionicSystem ;
+    rdfs:comment "Identification, friend or foe (IFF) is an identification system designed for command and control. It uses a transponder that listens for an interrogation signal and then sends a response that identifies the broadcaster." ;
+    rdfs:isDefinedBy "https://dbpedia.org/page/Identification_friend_or_foe" ;
+    :synonym "Identification Friend or Foe" ;
+    :todo "must has-part Transmitter and has-part Receiver (which could be resolved with has-part Transceiver for general cases, as Transceiver is both a transmitter and a receiver.)" .
 
 :ImageCodeSegment a owl:Class ;
     rdfs:label "Image Code Segment" ;
@@ -5462,6 +5847,13 @@ Identification of potential ROP exploit execution includes:
             owl:someValuesFrom xsd:anyURI ] ;
     rdfs:isDefinedBy "BFO, Cyc equiv, SUMO equiv, [Ontology Works] equiv" .
 
+:InformationExchange a owl:Class ;
+    rdfs:label "Information Exchange" ;
+    rdfs:subClassOf :D3FENDThing ;
+    rdfs:comment "Information exchange or information sharing means that people or other entities pass information from one to another. This could be done electronically or through certain systems. These are terms that can either refer to bidirectional information transfer in telecommunications and computer science or communication seen from a system-theoretic or information-theoretic point of view." ;
+    rdfs:isDefinedBy "https://dbpedia.org/page/Information_exchange" ;
+    :todo "Fits role of operational level information (aka \"resource\") exchanges of Information Elements https://docs.nomagic.com/display/UAFP190/Information+Element in DoDAF 2/UAF.   We also do not use the term Information Flow here to make sure to deconflict (for the moment) with specific concepts associated with form information theory sense of information flows found in security https://en.wikipedia.org/wiki/Information_flow_(information_theory)." .
+
 :InitialAccess a :OffensiveTactic,
         owl:Class,
         owl:NamedIndividual ;
@@ -5589,6 +5981,10 @@ If an attacker manages to stop the processes used to log an attack without setti
     rdfs:subClassOf :TestExecutionTool ;
     rdfs:comment "An integration test execution tool automatically performs integration testing.  Integration testing (sometimes called integration and testing, abbreviated I&T) is the phase in software testing in which individual software modules are combined and tested as a group." ;
     rdfs:seeAlso <http://dbpedia.org/resource/Integration_testing> .
+
+:Interface a owl:Class ;
+    rdfs:subClassOf :Artifact ;
+    rdfs:seeAlso "https://en.wikipedia.org/wiki/Interface_(computing)" .
 
 :InternetArticle a owl:Class,
         owl:NamedIndividual,
@@ -5758,17 +6154,35 @@ Types of restrictions that may be applied:
 
 :IPAddress a owl:Class ;
     rdfs:label "IP Address" ;
-    rdfs:subClassOf :Identifier,
+    rdfs:subClassOf :Address,
+        :Identifier,
         [ a owl:Restriction ;
             owl:onProperty :identifies ;
             owl:someValuesFrom :NetworkNode ] ;
     rdfs:comment "An Internet Protocol address (IP address) is a numerical label assigned to each device connected to a computer network that uses the Internet Protocol for communication.An IP address serves two main functions: host or network interface identification and location addressing. Internet Protocol version 4 (IPv4) defines an IP address as a 32-bit number. However, because of the growth of the Internet and the depletion of available IPv4 addresses, a new version of IP (IPv6), using 128 bits for the IP address, was standardized in 1998. IPv6 deployment has been ongoing since the mid-2000s." ;
-    rdfs:isDefinedBy <http://dbpedia.org/resource/IP_address> .
+    rdfs:isDefinedBy <http://dbpedia.org/resource/IP_address> ;
+    :todo "Remove :subClassOf Identifier.",
+        "Review: Should the address's value be 'address' property?  Various octets or other properties could abe added.  Alternatively, could use 'integer-address', 'address-as-integer', or 'value' instead of 'address' as property name for the integer value of the address." .
+
+:IPCConnection a owl:Class ;
+    rdfs:label "IPC Connection" ;
+    rdfs:subClassOf :SocketConnection,
+        [ a owl:Restriction ;
+            owl:onProperty :has-end-point ;
+            owl:someValuesFrom :IPCSocket ] .
 
 :IPCNetworkTraffic a owl:Class ;
     rdfs:label "IPC Network Traffic" ;
     rdfs:subClassOf :NetworkTraffic ;
     rdfs:comment "IPC network traffic is network traffic related to inter-process communication (IPC) between network nodes..This includes only network traffic conforming to a standard IPC protocol; not custom protocols." .
+
+:IPCSocket a owl:Class ;
+    rdfs:label "IPC Socket" ;
+    rdfs:subClassOf :CommunicationsEndPoint,
+        :DigitalArtifact ;
+    rdfs:comment "An IPC socket is a data communications endpoint for exchanging data betwen processes on the same host operating system.  These may be unnamed, or bound to filesystem pathname, or in Linux, they may be given a name in an abstract namespace." ;
+    rdfs:isDefinedBy "https://dbpedia.org/page/Unix_domain_socket" ;
+    :synonym "Unix Domain Socket" .
 
 :IPCTrafficAnalysis a :NetworkTrafficAnalysis,
         owl:Class,
@@ -5823,6 +6237,88 @@ IPC can occur within a single computer or between multiple computers remotely th
     :kb-reference :Reference-Database_for_receiving_storing_and_compiling_information_about_email_messages,
         :Reference-Finding_phishing_sites .
 
+:IPTransmissionTechnique a owl:Class ;
+    rdfs:label "IP Transmission Technique" ;
+    rdfs:subClassOf :TransmissionTechnique ;
+    rdfs:seeAlso "https://ipcisco.com/lesson/unicast-broadcast-multicast-anycast/" .
+
+:IPv4Address a owl:Class ;
+    rdfs:label "IPv4 Address" ;
+    rdfs:subClassOf :IPAddress,
+        [ a owl:Restriction ;
+            owl:onProperty :address ;
+            owl:someValuesFrom xsd:unsignedInt ] .
+
+:IPv4Broadcast a owl:Class ;
+    rdfs:label "IPv4 Broadcast" ;
+    rdfs:subClassOf :Broadcast,
+        :IPv4TransmissionTechnique .
+
+:IPv4Multicast a owl:Class ;
+    rdfs:label "IPv4 Multicast" ;
+    rdfs:subClassOf :IPv4TransmissionTechnique,
+        :Multicast .
+
+:IPv4SocketAddress a owl:Class ;
+    rdfs:label "IPv4 Socket Address" ;
+    rdfs:subClassOf :SocketAddress,
+        [ a owl:Restriction ;
+            owl:onProperty :addressed-by ;
+            owl:someValuesFrom :IPv4Address ],
+        [ a owl:Restriction ;
+            owl:onProperty :port ;
+            owl:someValuesFrom xsd:unsignedShort ] .
+
+:IPv4TransmissionTechnique a owl:Class ;
+    rdfs:label "IPv4 Transmission Technique" ;
+    rdfs:subClassOf :IPTransmissionTechnique .
+
+:IPv4Unicast a owl:Class ;
+    rdfs:label "IPv4 Unicast" ;
+    rdfs:subClassOf :IPv4TransmissionTechnique,
+        :Unicast .
+
+:IPv6Address a owl:Class ;
+    rdfs:label "IPv6 Address" ;
+    rdfs:subClassOf :IPAddress,
+        [ a owl:Restriction ;
+            owl:onProperty :address ;
+            owl:someValuesFrom xsd:unsignedLong ] .
+
+:IPv6Anycast a owl:Class ;
+    rdfs:label "IPv6 Anycast" ;
+    rdfs:subClassOf :Anycast,
+        :IPv6TransmissionTechnique .
+
+:Ipv6Broadcast a owl:Class ;
+    rdfs:label "IPv6 Broadcast" ;
+    rdfs:subClassOf :Broadcast,
+        :IPv6TransmissionTechnique .
+
+:IPv6Multicast a owl:Class ;
+    rdfs:label "IPv6 Multicast" ;
+    rdfs:subClassOf :IPv6TransmissionTechnique,
+        :Multicast .
+
+:IPv6SocketAddress a owl:Class ;
+    rdfs:label "IPv6 Socket Address" ;
+    rdfs:subClassOf :SocketAddress,
+        [ a owl:Restriction ;
+            owl:onProperty :addressed-by ;
+            owl:someValuesFrom :IPv6Address ],
+        [ a owl:Restriction ;
+            owl:onProperty :port ;
+            owl:someValuesFrom xsd:unsignedShort ] .
+
+:IPv6TransmissionTechnique a owl:Class ;
+    rdfs:label "IPv6 Transmission Technique" ;
+    rdfs:subClassOf :IPTransmissionTechnique .
+
+:IPv6Unicast a owl:Class ;
+    rdfs:label "IPv6 Unicast" ;
+    rdfs:subClassOf :IPv6TransmissionTechnique,
+        :Unicast .
+
 :Isolate a :DefensiveTactic,
         owl:Class,
         owl:NamedIndividual ;
@@ -5832,10 +6328,24 @@ IPC can occur within a single computer or between multiple computers remotely th
     :display-order 2 ;
     :display-priority 0 .
 
+:JavaAPI a owl:Class ;
+    rdfs:label "Java API" ;
+    rdfs:subClassOf :API .
+
 :JavaScriptBlob a owl:Class ;
     rdfs:label "JavaScript Blob" ;
     rdfs:subClassOf :BinaryLargeObject ;
     rdfs:comment "A JavaScript Blob is a Blob that was created by a JavaScript Blob() constructor call or equivalent function." .
+
+:JavaSEv11API a owl:Class ;
+    rdfs:label "Java SE v11 API" ;
+    rdfs:subClassOf :JavaAPI .
+
+:JDBC a owl:Class ;
+    rdfs:subClassOf :JavaAPI ;
+    rdfs:comment "Java Database Connectivity (JDBC) is an application programming interface (API) for the programming language Java, which defines how a client may access a database." ;
+    rdfs:seeAlso "https://dbpedia.org/page/Java_Database_Connectivity" ;
+    :synonym "Java Database Connectivity" .
 
 :JobFunctionAccessPatternAnalysis a owl:Class,
         owl:NamedIndividual,
@@ -5993,6 +6503,11 @@ Most current Unix-like systems and Microsoft Windows support loadable kernel mod
     rdfs:subClassOf :DigitalArtifact ;
     rdfs:seeAlso "https://dbpedia.org/resource/Link" .
 
+:Linux a owl:Class ;
+    rdfs:label "Linux"@en ;
+    rdfs:subClassOf :Unix-likeOS ;
+    owl:disjointWith :Windows .
+
 :LocalAccountMonitoring a owl:Class,
         owl:NamedIndividual,
         :UserBehaviorAnalysis ;
@@ -6066,6 +6581,10 @@ Most current Unix-like systems and Microsoft Windows support loadable kernel mod
             owl:someValuesFrom :LocalResource ] ;
     rdfs:comment "Ephemeral digital artifact comprising a request of a local resource and any response from that resource." .
 
+:LocalStorage a owl:Class ;
+    rdfs:label "Local Storage" ;
+    rdfs:subClassOf :Storage .
+
 :LocalUserAccount a owl:Class ;
     rdfs:label "Local User Account" ;
     rdfs:subClassOf :UserAccount ;
@@ -6092,6 +6611,11 @@ A transaction log is a file (i.e., log) of the communications between a system a
 Many operating systems, software frameworks and programs include a logging system. A widely used logging standard is syslog, defined in Internet Engineering Task Force (IETF) RFC 5424). The syslog standard enables a dedicated, standardized subsystem to generate, filter, record, and analyze log messages. This relieves software developers of having to design and code their own ad hoc logging systems.""" ;
     rdfs:isDefinedBy <http://dbpedia.org/resource/Log_file> ;
     rdfs:seeAlso <http://wordnet-rdf.princeton.edu/id/06515875-n> .
+
+:LogicalChannel a owl:Class ;
+    rdfs:label "Logical Channel" ;
+    rdfs:subClassOf :Channel ;
+    :synonym "Virtual Circuit" .
 
 :LogicalLink a owl:Class ;
     rdfs:label "Logical Link" ;
@@ -6128,6 +6652,10 @@ Many operating systems, software frameworks and programs include a logging syste
 :LogonUser a owl:Class ;
     rdfs:label "Logon User" ;
     rdfs:subClassOf :SystemCall .
+
+:macOS a owl:Class ;
+    rdfs:label "macOS" ;
+    rdfs:subClassOf :Unix-likeOS .
 
 :MacOSKeychain a owl:Class ;
     rdfs:label "MacOS Keychain" ;
@@ -6228,12 +6756,14 @@ Initial planning of access model and continuous monitoring of the available user
 
 :MemoryAddress a owl:Class ;
     rdfs:label "Memory Address" ;
-    rdfs:subClassOf :DigitalArtifact,
+    rdfs:subClassOf :Address,
+        :DigitalArtifact,
         [ a owl:Restriction ;
             owl:onProperty :addresses ;
             owl:someValuesFrom :MemoryWord ] ;
     rdfs:comment "In computing, a memory address is a reference to a specific memory location used at various levels by software and hardware." ;
-    rdfs:isDefinedBy "https://dbpedia.org/page/Memory_address" .
+    rdfs:isDefinedBy "https://dbpedia.org/page/Memory_address" ;
+    :comment "In computing, a memory address is a reference to a specific memory location used at various levels by software and hardware. Memory addresses are fixed-length sequences of digits conventionally displayed and manipulated as unsigned integers. Such numerical semantic bases itself upon features of CPU (such as the instruction pointer and incremental address registers), as well upon use of the memory like an array endorsed by various programming languages." .
 
 :MemoryAddressSpace a owl:Class ;
     rdfs:label "Memory Address Space" ;
@@ -6426,6 +6956,18 @@ Symmetric encryption uses the same cryptographic key by both the sender and rece
     rdfs:comment "Microcode is a computer hardware technique that interposes a layer of organization between the CPU hardware and the programmer-visible instruction set architecture of the computer. As such, the microcode is a layer of hardware-level instructions that implement higher-level machine code instructions or internal state machine sequencing in many digital processing elements." ;
     rdfs:isDefinedBy <http://dbpedia.org/resource/Microcode> .
 
+:MilStd1553Bus a owl:Class ;
+    rdfs:label "MIL-STD-1553 Bus" ;
+    rdfs:subClassOf :Bus .
+
+:MilStd1553BusController a owl:Class ;
+    rdfs:label "MIL-STD-1553 Bus Controller" ;
+    rdfs:subClassOf :HardwareDevice .
+
+:MilStd1553RemoteTerminal a owl:Class ;
+    rdfs:label "MIL-STD-1553 Remote Terminal" ;
+    rdfs:subClassOf :HardwareDevice .
+
 :MobilePhone a owl:Class ;
     rdfs:label "Mobile Phone" ;
     skos:altLabel "Cellphone",
@@ -6473,6 +7015,10 @@ Symmetric encryption uses the same cryptographic key by both the sender and rece
     rdfs:comment "A system call to rename or move a file.  Linux's rename() is an example of this kind of system call." ;
     rdfs:seeAlso <https://man7.org/linux/man-pages/man2/rename.2.html> .
 
+:MSEdge a owl:Class ;
+    rdfs:label "MS Edge" ;
+    rdfs:subClassOf :Browser .
+
 :Multi-factorAuthentication a :CredentialHardening,
         owl:Class,
         owl:NamedIndividual ;
@@ -6490,11 +7036,23 @@ When logging into an account users present two or more credentials that fall int
 MFA configuration steps may vary across accounts and in some cases left up to users to activate and implement.""" ;
     :kb-reference <http://d3fend.mitre.org/ontologies/d3fend.owl#Reference-MethodAndApparatusForUtilizingATokenForResourceAccess_RsaSecurityInc.> .
 
+:Multicast a owl:Class ;
+    rdfs:subClassOf :IPTransmissionTechnique .
+
 :MultimediaDocumentFile a owl:Class ;
     rdfs:label "Multimedia Document File" ;
     rdfs:subClassOf :DocumentFile ;
     rdfs:comment "Digital video files which often contain audio." ;
     rdfs:seeAlso "https://dbpedia.org/page/Multimedia" .
+
+:MultipointLink a owl:Class ;
+    rdfs:label "Multipoint Link" ;
+    rdfs:subClassOf :TelecommunicationLink ;
+    rdfs:comment "A communications medium with two or more endpoints." .
+
+:MySql a owl:Class ;
+    rdfs:label "MySql"@en ;
+    rdfs:subClassOf :RelationalDatabase .
 
 :Network a owl:Class ;
     rdfs:label "Network" ;
@@ -6503,12 +7061,23 @@ MFA configuration steps may vary across accounts and in some cases left up to us
     rdfs:comment "A network is a group of computers that use a set of common communication protocols over digital interconnections for the purpose of sharing resources located on or provided by the network nodes. The interconnections between nodes are formed from a broad spectrum of telecommunication network technologies, based on physically wired, optical, and wireless radio-frequency methods that may be arranged in a variety of network topologies." ;
     rdfs:seeAlso <http://wordnet-rdf.princeton.edu/id/03826490-n> .
 
+:NetworkAdapter a owl:Class ;
+    rdfs:label "Network Adapter" ;
+    rdfs:subClassOf :HardwareDevice .
+
 :NetworkCardFirmware a owl:Class ;
     rdfs:label "Network Card Firmware" ;
     skos:altLabel "Network Controller Firmware" ;
     rdfs:subClassOf :PeripheralFirmware ;
     rdfs:comment "Firmware that is installed on a network card (network interface controller)." ;
     rdfs:seeAlso <http://dbpedia.org/resource/Network_interface_controller> .
+
+:NetworkConnection a owl:Class ;
+    rdfs:label "Network Connection" ;
+    rdfs:subClassOf :IPCConnection,
+        [ a owl:Restriction ;
+            owl:onProperty :has-end-point ;
+            owl:someValuesFrom :NetworkSocket ] .
 
 :NetworkDirectoryResource a owl:Class ;
     rdfs:label "Network Directory Resource" ;
@@ -6687,6 +7256,15 @@ Administrators collect information on network nodes in their architecture using 
     rdfs:seeAlso <http://dbpedia.org/resource/OSI_model>,
         <http://dbpedia.org/resource/Session_(computer_science)> .
 
+:NetworkSocket a owl:Class ;
+    rdfs:label "Network Socket" ;
+    rdfs:subClassOf :IPCSocket,
+        [ a owl:Restriction ;
+            owl:onProperty :addressed-by ;
+            owl:someValuesFrom :SocketAddress ] ;
+    rdfs:comment "A network socket is a software structure within a network node of a computer network that serves as an endpoint for sending and receiving data across the network." ;
+    rdfs:isDefinedBy "https://dbpedia.org/page/Network_socket" .
+
 :NetworkTraffic a owl:Class ;
     rdfs:label "Network Traffic" ;
     skos:altLabel "Data Traffic" ;
@@ -6851,6 +7429,13 @@ Hosts/users within a computer network are analyzed to identify communities of ho
     rdfs:seeAlso <http://dbpedia.org/resource/Object_file> ;
     :todo "Fix IRI to fix 'i' in \"File\" substring of IRI" .
 
+:ODBC a owl:Class ;
+    rdfs:label "ODBC" ;
+    rdfs:subClassOf :API ;
+    :comment "In computing, Open Database Connectivity (ODBC) is a standard application programming interface (API) for accessing database management systems (DBMS)." ;
+    rdfs:seeAlso "https://dbpedia.org/page/Open_Database_Connectivity" ;
+    :synonym "Open Database Connectivity" .
+
 :OffensiveTactic a owl:Class ;
     rdfs:label "Offensive Tactic" ;
     rdfs:subClassOf :ATTACKThing,
@@ -6943,7 +7528,10 @@ Additionally, after the code file is printed, it could be recovered from the sys
             owl:someValuesFrom :SystemServiceSoftware ],
         [ a owl:Restriction ;
             owl:onProperty :may-contain ;
-            owl:someValuesFrom :OperatingSystemConfigurationComponent ] ;
+            owl:someValuesFrom :OperatingSystemConfigurationComponent ],
+        [ a owl:Restriction ;
+            owl:onProperty :mounts ;
+            owl:someValuesFrom :FileSystem ] ;
     rdfs:comment "An operating system (OS) is system software that manages computer hardware and software resources and provides common services for computer programs. All computer programs, excluding firmware, require an operating system to function. Time-sharing operating systems schedule tasks for efficient use of the system and may also include accounting software for cost allocation of processor time, mass storage, printing, and other resources." ;
     rdfs:seeAlso <http://dbpedia.org/resource/Operating_system> .
 
@@ -7152,6 +7740,10 @@ Operating System Monitoring Techniques have varied implementations including bui
         :Reference-OrganizationalManagementInSAPERPHCM,
         :Reference-UnifiedArchitectureFrameworkUAF .
 
+:OS-9 a owl:Class ;
+    rdfs:subClassOf :Real-timeOS ;
+    :comment "OS-9 is a family of real-time, process-based, multitasking, multi-user operating systems, developed in the 1980s, originally by Microware Systems Corporation for the Motorola 6809 microprocessor." .
+
 :OutboundInternetDNSLookupTraffic a owl:Class ;
     rdfs:label "Outbound Internet DNS Lookup Traffic" ;
     rdfs:subClassOf :DNSNetworkTraffic,
@@ -7312,6 +7904,10 @@ There are various strategies for developing filtering rulesets:
             owl:someValuesFrom :VirtualAddress ] ;
     rdfs:comment "A page table  is the data structure used by the MMU in a virtual memory computer system  to store the mapping between virtual addresses (virtual pages) and physical addresses (page frames)." ;
     rdfs:isDefinedBy "Page table – Wikipedia" .
+
+:ParallelBus a owl:Class ;
+    rdfs:label "Parallel Bus" ;
+    rdfs:subClassOf :Bus .
 
 :ParentProcess a owl:Class ;
     rdfs:label "Parent Process" ;
@@ -7532,7 +8128,11 @@ Changes in firmware hash values may indicate that the firmware has been tampered
 
 :PhysicalLink a owl:Class ;
     rdfs:label "Physical Link" ;
-    rdfs:subClassOf :Link ;
+    rdfs:subClassOf :Channel,
+        :Link ;
+    :d3fend-annotation """A physical link is a dedicated connection for communication that uses some physical media (electrical, electromagnetic, optical, to include clear spaces or vacuums.)  A physical link represents only a single hop (link) in any larger communcations path, circuit, or network.
+
+NOTE: not synonymous with data link as a data link can be over a telecommunications circuit, which may be a virtual circuit composed of multiple phyical links.""" ;
     :definition """A physical link is a dedicated connection for communication that uses some physical media (electrical, electromagnetic, optical, to include clear spaces or vacuums.)  A physical link represents only a single hop (link) in any larger communcations path, circuit, or network.
 
 NOTE: not synonymous with data link as a data link can be over a telecommunications circuit, which may be a virtual circuit composed of multiple phyical links.""" ;
@@ -7567,6 +8167,12 @@ NOTE: not synonymous with data link as a data link can be over a telecommunicati
         [ a owl:Restriction ;
             owl:onProperty :has-location ;
             owl:someValuesFrom :PhysicalLocation ] .
+
+:PhysicalTelecommunicationLink a owl:Class ;
+    rdfs:label "Physical Telecommunication Link" ;
+    rdfs:subClassOf :PhysicalLink,
+        :TelecommunicationLink ;
+    rdfs:comment "A physical telecommunications channel is a shared physical medium for telecommunications between to or more endpoints." .
 
 :Pipe a owl:Class ;
     rdfs:label "Pipe" ;
@@ -7634,11 +8240,29 @@ Monitored platform components includes system files and embedded devices such as
  * Hardware device drivers
  * Embedded firmware devices""" .
 
+:PLC a owl:Class ;
+    rdfs:label "PLC" ;
+    rdfs:subClassOf :DigitalControlSystem ;
+    rdfs:comment "A programmable logic controller (PLC) or programmable controller is an industrial computer that has been ruggedized and adapted for the control of manufacturing processes, such as assembly lines, machines, robotic devices, or any activity that requires high reliability, ease of programming, and process fault diagnosis." ;
+    rdfs:seeAlso "https://en.wikipedia.org/wiki/Programmable_logic_controller" ;
+    :synonym "Programmable Logic Controller" ;
+    :todo "The DBPedia definition may be contentious (over-constrained by early usage context.)  Compare to more general sense in http://www.ijmse.org/Volume2/Issue8/paper9.pdf" .
+
+:Point-to-pointLink a owl:Class ;
+    rdfs:label "Point-to-point Link" ;
+    rdfs:subClassOf :TelecommunicationLink ;
+    rdfs:comment "A communications medium with exactly two endpoints and without any intervening artifacts in between." ;
+    rdfs:seeAlso "https://en.wikipedia.org/wiki/Point-to-point_(telecommunications)",
+        "https://en.wikipedia.org/wiki/Point-to-Point_Protocol" ;
+    :synonym "Point-to-point Connection" .
+
 :Pointer a owl:Class ;
     rdfs:label "Pointer" ;
-    rdfs:subClassOf :DigitalArtifact ;
+    rdfs:subClassOf :DigitalArtifact,
+        :MemoryAddress ;
     rdfs:comment "In computer science, a pointer is a programming language object, whose value refers to (or \"points to\") another value stored elsewhere in the computer memory using its memory address. A pointer references a location in memory, and obtaining the value stored at that location is known as dereferencing the pointer. As an analogy, a page number in a book's index could be considered a pointer to the corresponding page; dereferencing such a pointer would be done by flipping to the page with the given page number." ;
-    rdfs:isDefinedBy <http://dbpedia.org/resource/Pointer_(computer_programming)> .
+    rdfs:isDefinedBy <http://dbpedia.org/resource/Pointer_(computer_programming)> ;
+    :todo "Remove rdfs:subClassOf :DigitalArtifact." .
 
 :PointerAuthentication a :ApplicationHardening,
         owl:Class,
@@ -8284,9 +8908,17 @@ Metadata collection on enterprises can yield large data sets. Storage, indexing,
     rdfs:comment "A public key can be disseminated widely as part of an asymmetric cryptography framework and be used to encrypt messages to send to the public key's owner or to authenticate signed messages from that sender." ;
     rdfs:seeAlso <http://dbpedia.org/resource/Public-key_cryptography> .
 
+:PublishSubscribeChannel a owl:Class ;
+    rdfs:label "Publish-Subscribe Channel" ;
+    rdfs:subClassOf :ApplicationChannel .
+
 :PythonScriptFile a owl:Class ;
     rdfs:label "Python Script File" ;
     rdfs:subClassOf :ExecutableScript .
+
+:RadioHead a owl:Class ;
+    rdfs:subClassOf :System ;
+    :todo "Digest into taxonomy, radio heads are not always Avionics BTW." .
 
 :RadioModem a owl:Class ;
     rdfs:label "Radio Modem" ;
@@ -8301,9 +8933,22 @@ Metadata collection on enterprises can yield large data sets. Storage, indexing,
     rdfs:isDefinedBy "https://dbpedia.org/page/Random-access_memory" ;
     :synonym "Random-access Memory" .
 
+:RaspberryPi a owl:Class ;
+    rdfs:label "Raspberry Pi" ;
+    rdfs:subClassOf :EmbeddedComputer ;
+    :todo """This is not inherently true, but an adequte fit for many use cases and the whole distinctions of stereotypes under NetworkNode.  It is often the case, but RaspberryPi computers are really just low power single-board computers (SBCs) and used a lot for hobby work and as quick prototyping for embedded work of robots, etc.
+
+Embedded<X> is really a role that the X plays with respect to some larger system, not a class of computer design like RasperryPi.""" .
+
 :RawMemoryAccessFunction a owl:Class ;
     rdfs:label "Raw Memory Access Function" ;
     rdfs:subClassOf :Subroutine .
+
+:RCS a owl:Class ;
+    rdfs:label "RCS" ;
+    rdfs:subClassOf :DigitalControlSystem ;
+    rdfs:comment "A radar control system is a control system that controls a radar." ;
+    :synonym "Radar Control System" .
 
 :RDPSession a owl:Class ;
     rdfs:label "RDP Session" ;
@@ -8319,6 +8964,14 @@ Metadata collection on enterprises can yield large data sets. Storage, indexing,
     rdfs:subClassOf :SystemCall ;
     rdfs:comment "A program that needs to access data from a file stored in a file system uses the read system call. The file is identified by a file descriptor that is normally obtained from a previous call to open. This system call reads in data in bytes, the number of which is specified by the caller, from the file and stores then into a buffer supplied by the calling process." ;
     rdfs:seeAlso <http://dbpedia.org/resource/Read_(system_call)> .
+
+:Real-timeOS a owl:Class ;
+    rdfs:label "Real-time OS" ;
+    rdfs:subClassOf :OperatingSystem ;
+    rdfs:isDefinedBy "A real-time operating system (RTOS) is an operating system (OS) for real-time applications that processes data and events that have critically defined time constraints.",
+        "https://dbpedia.org/page/Real-time_operating_system" ;
+    :synonym "Real-time Operating System",
+        "RTOS" .
 
 :Reconnaissance a owl:Class ;
     rdfs:subClassOf :OffensiveTactic ;
@@ -8337,6 +8990,14 @@ Metadata collection on enterprises can yield large data sets. Storage, indexing,
     rdfs:comment "In computer science, a record (also called struct or compound data) is a basic data structure. A record is a collection of fields, possibly of different data types, typically in fixed number and sequence . The fields of a record may also be called members, particularly in object-oriented programming. Fields may also be called elements, though these risk confusion with the elements of a collection. A tuple may or may not be considered a record, and vice versa, depending on conventions and the specific programming language." ;
     rdfs:isDefinedBy <http://dbpedia.org/resource/Record_(computer_science)> .
 
+:RedHat7 a owl:Class ;
+    rdfs:label "Red Hat 7" ;
+    rdfs:subClassOf :Linux .
+
+:RedHat8 a owl:Class ;
+    rdfs:label "Red Hat 8" ;
+    rdfs:subClassOf :Linux .
+
 :Reference a owl:Class ;
     rdfs:label "Reference" ;
     rdfs:subClassOf :D3FENDThing .
@@ -8344,6 +9005,10 @@ Metadata collection on enterprises can yield large data sets. Storage, indexing,
 :ReferenceType a owl:Class ;
     rdfs:label "Reference Type" ;
     rdfs:subClassOf :D3FENDThing .
+
+:RelationalDatabase a owl:Class ;
+    rdfs:label "Relational Database"@en ;
+    rdfs:subClassOf :Database .
 
 :RelayPatternAnalysis a :NetworkTrafficAnalysis,
         owl:Class,
@@ -8504,6 +9169,12 @@ This technique analyzes a user's resource accesses by comparing the user's recen
     rdfs:comment "The resource fork is a fork or section of a file on Apple's classic Mac OS operating system, which was also carried over to the modern macOS for compatibility, used to store structured data along with the unstructured data stored within the data fork." ;
     rdfs:isDefinedBy <http://dbpedia.org/resource/Resource_fork> .
 
+:RESTAPI a owl:Class ;
+    rdfs:label "REST API" ;
+    rdfs:subClassOf :API ;
+    :synonym "RESTful API" ;
+    :todo "Possibly RESTful API is not synonym in theory, though only one REST API really in current use." .
+
 :ReverseProxyServer a owl:Class ;
     rdfs:label "Reverse Proxy Server" ;
     rdfs:subClassOf :ProxyServer ;
@@ -8561,6 +9232,11 @@ Queries for reverse resolution requests (that is, requests where IP(s) are sent 
   - Usage of new protocols to provide confidentiality for DNS traffic, such as DoH (DNS over HTTPS) and DoT (DNS over TLS), complicates collection of the IP address(es) in DNS queries. These protocols have often been enabled in browser settings transparently after a browser update, with DNS queries proxied over one of these cryptographic protocols through a specified host.""" ;
     :kb-reference :Reference-UseDNSPolicyForApplyingFiltersOnDNSQueries ;
     :synonym "Reverse Resolution IP Blacklisting" .
+
+:RFChannel a owl:Class ;
+    rdfs:label "RF Channel" ;
+    rdfs:subClassOf :PhysicalTelecommunicationLink ;
+    :synonym "Radio Frequency Channel" .
 
 :RFShielding a owl:Class,
         owl:NamedIndividual,
@@ -8632,6 +9308,10 @@ Example RPC Protocols:
         :Reference-RPCCallInterception_CrowdstrikeInc,
         :Reference-SMBWriteRequest-NamedPipes_MITRE ;
     :synonym "RPC Protocol Analysis" .
+
+:Safari a owl:Class ;
+    rdfs:label "Safari" ;
+    rdfs:subClassOf :Browser .
 
 :SavedInstructionPointer a owl:Class ;
     rdfs:label "Saved Instruction Pointer" ;
@@ -8805,6 +9485,10 @@ Legitimate emails from a sender may receive a lower trust rating over time if th
     rdfs:label "Sensor" ;
     rdfs:subClassOf :D3FENDThing .
 
+:SerialBus a owl:Class ;
+    rdfs:label "Serial Bus" ;
+    rdfs:subClassOf :Bus .
+
 :SerializationFunction a owl:Class ;
     rdfs:label "Serialization Function" ;
     rdfs:subClassOf :Subroutine .
@@ -8881,9 +9565,11 @@ The organization collects and models architectural information about the service
 
 :Session a owl:Class ;
     rdfs:label "Session" ;
-    rdfs:subClassOf :DigitalArtifact ;
+    rdfs:subClassOf :DigitalArtifact,
+        :LogicalChannel ;
     rdfs:comment "In computer science, in particular networking, a session is a semi-permanent interactive information interchange, also known as a dialogue, a conversation or a meeting, between two or more communicating devices, or between a computer and user (see Login session). A session is set up or established at a certain point in time, and then torn down at some later point. An established communication session may involve more than one message in each direction. A session is typically, but not always, stateful, meaning that at least one of the communicating parts needs to save information about the session history in order to be able to communicate, as opposed to stateless communication, where the communication consists of independent requests with responses." ;
-    rdfs:isDefinedBy <http://dbpedia.org/resource/Session_(computer_science)> .
+    rdfs:isDefinedBy <http://dbpedia.org/resource/Session_(computer_science)> ;
+    :todo "Remove rdfs:subClassOf :DigitalArtifact." .
 
 :SessionCookie a owl:Class ;
     rdfs:label "Session Cookie" ;
@@ -9000,6 +9686,9 @@ Another difference are the capabilities of the mechanism:
     rdfs:seeAlso <http://dbpedia.org/resource/Shortcut_(computing)>,
         <http://dbpedia.org/resource/Symbolic_link#Shortcuts> .
 
+:Simplex a owl:Class ;
+    rdfs:subClassOf :TransmissionMode .
+
 :SlowSymbolicLink a owl:Class ;
     rdfs:label "Slow Symbolic Link" ;
     skos:altLabel "Slow Symlink" ;
@@ -9007,6 +9696,22 @@ Another difference are the capabilities of the mechanism:
         :UnixLink ;
     rdfs:comment "A slow symbolic link is any symbolic link on a Unix filesystem that is not a fast symbolic link; slow symlink is thus retroactively termed from fast symlink.  Slow symbolic links stored the symbolic link information as data in regular files." ;
     rdfs:seeAlso <http://dbpedia.org/resource/Symbolic_link#Storage_of_symbolic_links> .
+
+:SocketAddress a owl:Class ;
+    rdfs:label "Socket Address" ;
+    rdfs:subClassOf :Address,
+        [ a owl:Restriction ;
+            owl:onProperty :addressed-by ;
+            owl:someValuesFrom :IPAddress ],
+        [ a owl:Restriction ;
+            owl:onProperty :port ;
+            owl:someValuesFrom xsd:unsignedShort ] ;
+    rdfs:comment "An internet protocol endpoint address.   For each protocol type, a subclass of Socket Address can be defined (e.g., IPv6 and IPv4 Socket Address classes.)" ;
+    rdfs:seeAlso "https://en.wikipedia.org/wiki/Network_socket#Socket_addresses" .
+
+:SocketConnection a owl:Class ;
+    rdfs:label "Socket Connection" ;
+    rdfs:subClassOf :Connection .
 
 :Software a owl:Class ;
     rdfs:label "Software" ;
@@ -9031,6 +9736,11 @@ Another difference are the capabilities of the mechanism:
     rdfs:label "Software Deployment Tool" ;
     rdfs:subClassOf :ServiceApplication ;
     rdfs:comment "Software that coordinates the deployment process of software to systems, typically remotely." .
+
+:SoftwareInterface a owl:Class ;
+    rdfs:label "Software Interface" ;
+    rdfs:subClassOf :DigitalInterface ;
+    rdfs:seeAlso "https://en.wikipedia.org/wiki/Interface_(computing)" .
 
 :SoftwareInventory a :AssetInventory,
         owl:Class,
@@ -9098,6 +9808,11 @@ Application-layer discovery:
     :d3fend-id "D3-SU" ;
     :definition "Replacing old software on a computer system component." ;
     :kb-reference :Reference-MethodAndSystemForProvidingSoftwareUpdatesToLocalMachines .
+
+:Solid-stateDrive a owl:Class ;
+    rdfs:label "Solid-state Drive" ;
+    rdfs:subClassOf :LocalStorage ;
+    :synonym "SSD" .
 
 :SourceCode a owl:Class,
         owl:NamedIndividual,
@@ -9323,6 +10038,15 @@ Extremely complex password requirements may lead users to saving passwords in te
     rdfs:comment "A network switch (also called switching hub, bridging hub, and by the IEEE MAC bridge) is networking hardware that connects devices on a computer network by using packet switching to receive and forward data to the destination device. A network switch is a multiport network bridge that uses MAC addresses to forward data at the data link layer (layer 2) of the OSI model. Some switches can also forward data at the network layer (layer 3) by additionally incorporating routing functionality. Such switches are commonly known as layer-3 switches or multilayer switches." ;
     rdfs:isDefinedBy <http://dbpedia.org/resource/Network_switch> .
 
+:SwitchedBus a owl:Class ;
+    rdfs:label "Switched Bus" ;
+    rdfs:subClassOf :Bus ;
+    rdfs:isDefinedBy "https://en.wikipedia.org/wiki/System_bus" .
+
+:Sybase a owl:Class ;
+    rdfs:label "Sybase" ;
+    rdfs:subClassOf :RelationalDatabase .
+
 :SymbolicLink a owl:Class ;
     rdfs:label "Symbolic Link" ;
     skos:altLabel "Soft Link",
@@ -9346,7 +10070,23 @@ Extremely complex password requirements may lead users to saving passwords in te
     rdfs:label "System" ;
     rdfs:subClassOf :Artifact ;
     rdfs:comment "An artifact (instrumentality) that combines interrelated interacting artifacts designed to work as a coherent entity.  [Note that not all digital artifacts are systems nor are all systems digital artifacts.]" ;
-    rdfs:isDefinedBy "http://wordnet-rdf.princeton.edu/id/04384144-n" .
+    rdfs:isDefinedBy "http://wordnet-rdf.princeton.edu/id/04384144-n" ;
+    :comment "An artifact (instrumentality) that combines interrelated interacting artifacts designed to work as a coherent entity;" ;
+    :label "System" .
+
+:SystemBus a owl:Class ;
+    rdfs:label "System Bus" ;
+    rdfs:subClassOf :Bus,
+        [ a owl:Restriction ;
+            owl:onProperty :has-part ;
+            owl:someValuesFrom :AddressBus ],
+        [ a owl:Restriction ;
+            owl:onProperty :has-part ;
+            owl:someValuesFrom :ControlBus ],
+        [ a owl:Restriction ;
+            owl:onProperty :has-part ;
+            owl:someValuesFrom :DataBus ] ;
+    rdfs:isDefinedBy "https://en.wikipedia.org/wiki/System_bus" .
 
 :SystemCall a owl:Class ;
     rdfs:label "System Call" ;
@@ -14860,6 +15600,13 @@ When system firmware verification fails a set of predefined responses is typical
     rdfs:comment "A task scheduler software is operating system software that when run executes scheduled tasks (time-scheduling in the sense of wall clock time; not operating system scheduling of processes for multitasking). Processes running such software are task scheduler processes." ;
     rdfs:seeAlso "Task Scheduler Process" .
 
+:TCAS a owl:Class ;
+    rdfs:label "TCAS" ;
+    rdfs:subClassOf :AvionicSystem ;
+    rdfs:comment "A traffic collision avoidance system or traffic alert and collision avoidance system (both abbreviated as TCAS, and pronounced /tiːkæs/; TEE-kas) is an aircraft collision avoidance system designed to reduce the incidence of mid-air collision (MAC) between aircraft." ;
+    rdfs:isDefinedBy "https://dbpedia.org/page/Traffic_collision_avoidance_system" ;
+    :synonym "Traffic Collision Avoidance System" .
+
 :Technique a owl:Class ;
     rdfs:label "Technique" ;
     rdfs:subClassOf :D3FENDThing,
@@ -14884,6 +15631,12 @@ When system firmware verification fails a set of predefined responses is typical
             owl:someValuesFrom xsd:string ] ;
     rdfs:comment "A reference used to develop KB articles." ;
     :pref-label "Technique Reference" .
+
+:TelecommunicationLink a owl:Class ;
+    rdfs:label "Telecommunication Link" ;
+    rdfs:subClassOf :Channel ;
+    rdfs:comment "In a telecommunications network, a link is a communication channel that connects two or more devices for the purpose of data transmission. The link may be a dedicated physical link or a virtual circuit that uses one or more physical links or shares a physical link with other telecommunications links." ;
+    rdfs:isDefinedBy "https://dbpedia.org/page/Telecommunications_link" .
 
 :TerminateProcess a owl:Class ;
     rdfs:label "Terminate Process" ;
@@ -15000,6 +15753,14 @@ DMARC is an email policy and authentication protocol that seeks to ensure that t
     rdfs:comment "A translation lookaside buffer (TLB) is a memory cache that is used to reduce the time taken to access a user memory location. It is a part of the chip's memory-management unit (MMU)." ;
     rdfs:isDefinedBy "https://dbpedia.org/page/Translation_lookaside_buffer" .
 
+:TransmissionMode a owl:Class ;
+    rdfs:label "Transmission Mode" ;
+    rdfs:subClassOf :D3FENDThing .
+
+:TransmissionTechnique a owl:Class ;
+    rdfs:label "Transmission Technique" ;
+    rdfs:subClassOf :D3FENDThing .
+
 :TransportLink a owl:Class ;
     rdfs:label "Transport Link" ;
     rdfs:subClassOf :LogicalLink .
@@ -15012,11 +15773,29 @@ DMARC is an email policy and authentication protocol that seeks to ensure that t
         <https://www.educative.io/edpresso/keystore-vs-truststore> ;
     :todo "Not sure in practice we need this abstraction... what is the trust store that is not a certificate trust store?  Or was it to distinguish between standard CA PKI truststores and other non-SSL schemes?" .
 
+:Ubuntu21 a owl:Class ;
+    rdfs:label "Ubuntu 21" ;
+    rdfs:subClassOf :Linux .
+
+:UnencryptedChannel a owl:Class ;
+    rdfs:label "Unencrypted Channel" ;
+    rdfs:subClassOf :LogicalChannel .
+
+:Unicast a owl:Class ;
+    rdfs:subClassOf :IPTransmissionTechnique ;
+    rdfs:comment "Unicast is the transmission technique where there is only one receiver. This is one-to-one communication." .
+
 :UnitTestExecutionTool a owl:Class ;
     rdfs:label "Unit Test Execution Tool" ;
     rdfs:subClassOf :TestExecutionTool ;
     rdfs:comment "An unit test execution tool automatically performs unit testing.  Unit testing is a software testing method by which individual units of source code are tested to determine whether they are fit for use.  Unit test execution tools work with sets of one or more computer program modules together with associated control data, usage procedures, and operating procedures. This contrasts with integration testing, which tests inter-unit dependencies and the modules as a group." ;
     rdfs:seeAlso <http://dbpedia.org/resource/Unit_testing> .
+
+:Unix-likeOS a owl:Class ;
+    rdfs:label "Unix-like OS" ;
+    rdfs:subClassOf :OperatingSystem ;
+    rdfs:isDefinedBy "https://dbpedia.org/page/Unix-like" ;
+    :synonym "Unix-like Operating System" .
 
 :UnixHardLink a owl:Class ;
     rdfs:label "Unix Hard Link" ;
@@ -15030,15 +15809,27 @@ DMARC is an email policy and authentication protocol that seeks to ensure that t
     rdfs:subClassOf :FileSystemLink ;
     rdfs:comment "A Unix link is a file link in a Unix file system." .
 
+:URI a owl:Class ;
+    rdfs:label "URI" ;
+    rdfs:subClassOf :Identifier ;
+    rdfs:isDefinedBy "https://dbpedia.org/page/Uniform_Resource_Identifier" ;
+    :comment "A Uniform Resource Identifier (URI) is a unique sequence of characters that identifies a logical or physical resource used by web technologies. URIs may be used to identify anything, including real-world objects, such as people and places, concepts, or information resources such as web pages and books." ;
+    :synonym "Universal Resource Identifier" .
+
 :URL a owl:Class ;
     rdfs:label "URL" ;
     skos:altLabel "Uniform Resource Locator" ;
-    rdfs:subClassOf :Identifier,
+    rdfs:subClassOf :Address,
+        :Identifier,
+        :URI,
         [ a owl:Restriction ;
             owl:onProperty :addresses ;
             owl:someValuesFrom :Resource ] ;
     rdfs:comment "A Uniform Resource Locator (URL), commonly informally termed a web address (a term which is not defined identically) is a reference to a web resource that specifies its location on a computer network and a mechanism for retrieving it.A URL is a specific type of Uniform Resource Identifier (URI), although many people use the two terms interchangeably. A URL implies the means to access an indicated resource, which is not true of every URI. URLs occur most commonly to reference web pages (http), but are also used for file transfer (ftp), email (mailto), database access (JDBC), and many other applications." ;
-    rdfs:isDefinedBy <http://dbpedia.org/resource/Uniform_Resource_Locator> .
+    rdfs:isDefinedBy <http://dbpedia.org/resource/Uniform_Resource_Locator> ;
+    :synonym "Web Address" ;
+    :todo "Change comment to: A Uniform Resource Locator (URL), commonly informally termed a web address (a term which is not defined identically) is a reference to a web resource that specifies its location on a computer network and a mechanism for retrieving it. A URL is a specific type of Uniform Resource Identifier (URI), although many people use the two terms interchangeably. A URL implies the means to access an indicated resource, which is not true of every URI. URLs occur most commonly to reference web pages (http), but are also used for file transfer (ftp), email (mailto), database access (JDBC), and many other applications.",
+        "Remove rdfs:subClassOf :Identifier." .
 
 :URLAnalysis a :IdentifierAnalysis,
         owl:Class,
@@ -15091,6 +15882,13 @@ URL analysis may trigger follow-on analytics such as **File Analysis**
     :d3fend-id "D3-URA" ;
     :definition "Analyzing the reputation of a URL." ;
     :kb-reference :Reference-Finding_phishing_sites .
+
+:URN a owl:Class ;
+    rdfs:label "URN" ;
+    rdfs:subClassOf :URI ;
+    rdfs:isDefinedBy "https://dbpedia.org/page/Uniform_Resource_Name" ;
+    :comment "A Uniform Resource Name (URN) is a Uniform Resource Identifier (URI) that uses the urn scheme. URNs are globally unique persistent identifiers assigned within defined namespaces so they will be available for a long period of time, even after the resource which they identify ceases to exist or becomes unavailable. URNs cannot be used to directly locate an item and need not be resolvable, as they are simply templates that another parser may use to find an item." ;
+    :synonym "Uniform Resource Name" .
 
 :UseCaseGoal a owl:Class ;
     rdfs:label "Use Case Goal" ;
@@ -15322,6 +16120,11 @@ Geolocation data for each user logon attempt is collected and used to create a b
     rdfs:comment "Utility applications are software applications designed to help to analyze, configure, optimize or maintain a computer. It is used to support the computer infrastructure - in contrast to application software, which is aimed at directly performing tasks that benefit ordinary users. However, utilities often form part of the application systems. For example, a batch job may run user-written code to update a database and may then include a step that runs a utility to back up the database, or a job may run a utility to compress a disk before copying files." ;
     rdfs:isDefinedBy <http://dbpedia.org/resource/Utility_software> .
 
+:VehicleManagementSystemController a owl:Class ;
+    rdfs:label "Vehicle Management System Controller" ;
+    rdfs:subClassOf :NetworkNode ;
+    :synonym "VMSC" .
+
 :Vendor a owl:Class ;
     rdfs:label "Vendor" ;
     rdfs:subClassOf :Provider,
@@ -15391,6 +16194,12 @@ It is a combination of VPN hardware and software technologies that provides VPN 
 
 :Vulnerability a owl:Class ;
     rdfs:subClassOf :D3FENDThing .
+
+:VxWorks a owl:Class ;
+    rdfs:label "VxWorks" ;
+    rdfs:subClassOf :Real-timeOS ;
+    rdfs:comment "VxWorks is a real-time operating system (RTOS) developed as proprietary software by Wind River Systems, a wholly owned subsidiary of TPG Capital, US. First released in 1987, VxWorks is designed for use in embedded systems requiring real-time, deterministic performance and, in many cases, safety and security certification, for industries, such as aerospace and defense, medical devices, industrial equipment, robotics, energy, transportation, network infrastructure, automotive, and consumer electronics." ;
+    rdfs:isDefinedBy "https://dbpedia.org/page/VxWorks" .
 
 :Weakness a owl:Class ;
     rdfs:label "Weakness" ;
@@ -15487,6 +16296,27 @@ User web session data is collected over a period of time to create a user behavi
     rdfs:comment "By contrast to a local area network (LAN), a wide area network (WAN), not only covers a larger geographic distance, but also generally involves leased telecommunication circuits or Internet links." ;
     rdfs:isDefinedBy <http://dbpedia.org/resource/Local_area_network> .
 
+:WiFiChannel a owl:Class ;
+    rdfs:label "Wi-Fi Channel" ;
+    rdfs:subClassOf :RFChannel .
+
+:WiFiNetworkAdapter a owl:Class ;
+    rdfs:label "Wi-Fi Network Adapter" ;
+    rdfs:subClassOf :WirelessNetworkAdapter .
+
+:Windows a owl:Class ;
+    rdfs:label "Windows"@en ;
+    rdfs:subClassOf :OperatingSystem .
+
+:Windows10 a owl:Class ;
+    rdfs:label "Windows 10"@en ;
+    rdfs:subClassOf :Windows ;
+    owl:disjointWith :WindowsXP .
+
+:Windows11 a owl:Class ;
+    rdfs:label "Windows 11" ;
+    rdfs:subClassOf :Windows .
+
 :WindowsRegistry a owl:Class ;
     rdfs:label "Windows Registry" ;
     rdfs:subClassOf :SystemConfigurationDatabase ;
@@ -15513,12 +16343,23 @@ User web session data is collected over a period of time to create a user behavi
     rdfs:seeAlso <http://dbpedia.org/resource/Shortcut_(computing)#Microsoft_Windows>,
         <http://dbpedia.org/resource/Symbolic_link#Shortcuts> .
 
+:WindowsXP a owl:Class ;
+    rdfs:label "Windows XP"@en ;
+    rdfs:subClassOf :Windows .
+
+:Wire a owl:Class ;
+    rdfs:subClassOf :PhysicalTelecommunicationLink .
+
 :WirelessAccessPoint a owl:Class ;
     rdfs:label "Wireless Access Point" ;
     skos:altLabel "WAP" ;
     rdfs:subClassOf :NetworkNode ;
     rdfs:comment "In computer networking, a wireless access point (WAP), or more generally just access point (AP), is a networking hardware device that allows other Wi-Fi devices to connect to a wired network. The AP usually connects to a router (via a wired network) as a standalone device, but it can also be an integral component of the router itself. An AP is differentiated from a hotspot which is a physical location where Wi-Fi access is available." ;
     rdfs:isDefinedBy <http://dbpedia.org/resource/Wireless_access_point> .
+
+:WirelessNetworkAdapter a owl:Class ;
+    rdfs:label "Wireless Network Adapter" ;
+    rdfs:subClassOf :NetworkAdapter .
 
 :WirelessRouter a owl:Class ;
     rdfs:label "Wireless Router" ;
@@ -19959,6 +20800,24 @@ With keystroke dynamics the biometric template used to identify an individual is
             :UseCasePrerequisite
             :UseCaseProcedure
             :UseCaseStep ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members (
+            :EncryptedChannel
+            :RFChannel
+            :UnencryptedChannel ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members (
+            :FullDuplex
+            :HalfDuplex
+            :Simplex ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members (
+            :ParallelBus
+            :SerialBus
+            :SwitchedBus ) .
 
 ### Annotations
 
