@@ -1300,11 +1300,6 @@ skos:altLabel a owl:AnnotationProperty ;
     :comment ":available casts the dcterms:available rdf Property as a DatatypeProperty." ;
     :definition "Date that the resource became or will become available." .
 
-:capec-id a owl:DatatypeProperty ;
-    rdfs:label "capec-id" ;
-    rdfs:subPropertyOf :d3fend-kb-data-property ;
-    :definition "Unique identifier for a CAPEC technique, i.e. a common attack pattern identified by the pattern CAPEC-[number]." .
-
 :comments a owl:DatatypeProperty,
         owl:FunctionalProperty ;
     rdfs:label "comments" ;
